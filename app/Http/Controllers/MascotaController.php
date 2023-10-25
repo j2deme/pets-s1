@@ -21,7 +21,7 @@ class MascotaController extends Controller
      */
     public function create()
     {
-        //
+        return view("mascotas.create");
     }
 
     /**
@@ -29,7 +29,12 @@ class MascotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mascota          = new Mascota();
+        $mascota->nombre  = $request->nombre;
+        $mascota->especie = $request->especie;
+        $mascota->edad    = $request->edad;
+        $mascota->save();
+        return redirect()->route("mascotas.index");
     }
 
     /**
@@ -37,7 +42,7 @@ class MascotaController extends Controller
      */
     public function show(Mascota $mascota)
     {
-        //
+        return view("mascotas.show", compact("mascota"));
     }
 
     /**
@@ -45,7 +50,7 @@ class MascotaController extends Controller
      */
     public function edit(Mascota $mascota)
     {
-        //
+        return view("mascotas.edit", compact("mascota"));
     }
 
     /**
@@ -53,7 +58,11 @@ class MascotaController extends Controller
      */
     public function update(Request $request, Mascota $mascota)
     {
-        //
+        $mascota->nombre  = $request->nombre;
+        $mascota->especie = $request->especie;
+        $mascota->edad    = $request->edad;
+        $mascota->save();
+        return redirect()->route("mascotas.index");
     }
 
     /**
@@ -61,6 +70,7 @@ class MascotaController extends Controller
      */
     public function destroy(Mascota $mascota)
     {
-        //
+        $mascota->delete();
+        return redirect()->route("mascotas.index");
     }
 }
